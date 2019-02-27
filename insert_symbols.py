@@ -60,12 +60,14 @@ def insert_snp500_symbols(symbols):
                             """
     insert_str = ("%s, " * 7)[:-2]
     final_str = "INSERT INTO symbol (%s) VALUES (%s)" % (column_str, insert_str)
-    cur = con.cursor()
     # print(cur)
     # die
-    cur.executemany(final_str , symbols)
-    # with con:
-    con.commit()
+
+    with con:
+        cur = con.cursor()
+        cur.executemany(final_str, symbols)
+        con.commit()
+
     print('insert into database:quantitative_trading  table:symbol')
 
 
